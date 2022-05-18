@@ -1,6 +1,8 @@
 import UIKit
 
-//Swift'te array'in eleman sayısına bakmak için kullandığımız count'un instance property olduğunu ve sınıf, struct gibi yapılarla birlikte kullanıldıgını gördüm. Python'da aynı işlev len() fonksiyonu ile yapılıyor. Bu durumda aynı işlevin computed property (var count: Int { get }) olarak tanımlanmasıyla direkt fonksiyon olarak tanımlanması arasındaki fark nedir?
+//-------------------------------------------
+//Ornek 1: class, property
+//Swift'te array'in eleman sayısına bakmak için kullandığımız count'un instance property olduğunu ve sınıf, struct gibi yapılarla birlikte kullanıldıgını gördüm. Python'da aynı işlev len() fonksiyonu ile yapılıyor. Bu durumda aynı işlevin computed property (var count: Int { get }) olarak tanımlanmasıyla direkt method/fonksiyon olarak tanımlanması arasındaki fark nedir?
  
 //Alttaki örnekte count'la aynı işleve sahip bir property(numberOfItems) oluşturmaya çalıştım.
  
@@ -27,4 +29,94 @@ class ornekClass {
 }
  
 let ornek = ornekClass(list: ["a","b"])
-print(ornek.numberOfItems)
+print(ornek.numberOfItems) //2
+ 
+ 
+
+//-------------------------------------------
+//Ornek 2: Inheritance
+ 
+class Fruit {
+    var edible: Bool
+     
+    init(edible: Bool) {
+        self.edible = edible
+    }
+     
+    func eat() {
+        if edible == true {
+            print("You can eat it!")
+        } else {
+            print("Don't eat it!🤢")
+        }
+    }
+}
+ 
+class Banana: Fruit {
+    var color: UIColor!
+    
+    init(color: UIColor) {
+        super.init(edible: true)
+        self.color = color
+    }
+    override func eat() {
+        if color == UIColor.yellow {
+            print("It's a banana")
+        } else {
+            print("edible \(edible)")
+        }
+    }
+}
+
+class Apple: Banana {
+    
+}
+ 
+class DangerousFruit: Fruit {
+    init() {
+        super.init(edible: false)
+    }
+}
+ 
+var banana = Banana(color: .yellow)
+banana.eat() //It's a banana
+ 
+var apple = Apple(color: .red)
+apple.eat() //edible true
+ 
+var dangerousFruit = DangerousFruit()
+dangerousFruit.eat() //Don't eat it!🤢
+ 
+
+ 
+
+//-------------------------------------------
+//Ornek 3: enum, switch case
+ 
+enum PaymentMethod {
+    case Cash
+    case Card(_ cardType: String)
+}
+ 
+func pay(secim: PaymentMethod) {
+    
+    switch(secim) {
+    case .Cash:
+        print("cash payment selected")
+    case .Card("debit"):
+        print("debit card selected")
+    case .Card("credit"):
+        print("credit card selected")
+    case .Card(_):
+        print("enter the type of card")
+    default: print("no payment method selected")
+    }
+}
+
+pay(secim: .Card("")) //enter type of card
+ 
+
+
+
+ 
+
