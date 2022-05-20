@@ -117,6 +117,24 @@ pay(secim: .Card("")) //enter type of card
  
 
 
-
+//-------------------------------------------
+//Ornek 4: struct, guard
+ 
+struct S {
+    var y: Int!
+    var z: Bool?
+    var a: String?
+     
+    mutating func degerAta() {
+        let object = S() //y'nin degeri nil
+        guard y != object.y else {
+            print("y degeri girilmemis / nil")
+            y = 3
+            return
+        }
+         
+        print("y degeri girilmis")
+    }
+}
  
 
