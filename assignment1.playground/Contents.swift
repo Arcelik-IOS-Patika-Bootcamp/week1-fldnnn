@@ -135,7 +135,7 @@ struct S {
          
         print("y degeri girilmis")
     }
-     
+
     mutating func setVariable( _ a: String) {
         self.a = a
         print(a)
@@ -146,4 +146,11 @@ struct S {
     }
 }
  
+var object = S(z: false)
+print(object) //S(y: nil, z: Optional(false), a: nil)
+object.degerAta() //y degeri girilmemis / nil
+print(object) //S(y: Optional(3), z: Optional(false), a: nil)
+object.degerAta() //y degeri girilmis
+object.getVariable() //nil
+object.setVariable("a'nin degeri degistirildi") //a'nin degeri degistirildi
 
