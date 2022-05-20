@@ -135,6 +135,15 @@ struct S {
          
         print("y degeri girilmis")
     }
+     
+    mutating func setVariable( _ a: String) {
+        self.a = a
+        print(a)
+    }
+     
+    func getVariable() -> Any {
+        return a as Any
+    }
 }
  
 
